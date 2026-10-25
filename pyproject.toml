@@ -1,0 +1,29 @@
+[project]
+name = "traderacli"
+version = "0.1.0"
+description = "CLI for searching tradera.se via the official Tradera API (read-only)"
+requires-python = ">=3.11"
+dependencies = ["httpx>=0.27"]
+
+[project.scripts]
+tradera = "traderacli.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/traderacli"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+markers = ["live: hits the real API (deselect with '-m \"not live\"')"]
+addopts = "-m 'not live'"
+
+[tool.pyright]
+typeCheckingMode = "basic"
